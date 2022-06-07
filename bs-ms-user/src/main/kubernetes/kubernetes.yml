@@ -1,0 +1,29 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: bs-ms-user-configmap
+  namespace: bs-ms
+data:
+  greeting.message: msg
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: bs-ms-user-secret
+  namespace: bs-ms
+data:
+  greeting.name: d2FuZ3lvbmdqdW4=
+type: Opaque
+#---
+#kind: PersistentVolumeClaim
+#apiVersion: v1
+#metadata:
+#  name: bs-ms-user-pvc
+#  namespace: bs-ms
+#spec:
+#  accessModes:
+#    - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 1Gi
