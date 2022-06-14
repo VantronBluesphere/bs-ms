@@ -14,7 +14,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.time.Instant;
 
-@Path("/api/v1")
+@Path("/api/v1/user")
 public class TestResource {
 
   @RestClient
@@ -23,7 +23,7 @@ public class TestResource {
   @Context
   HttpServerRequest request;
 
-  @Path("/user/test")
+  @Path("/test")
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Uni<JsonObject> test() {
@@ -31,7 +31,7 @@ public class TestResource {
     return bs1Service.bs1Test();
   }
 
-  @Path("/user/fail50PercentTime")
+  @Path("/fail50PercentTime")
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Uni<JsonObject> fail50PercentTime() {
@@ -39,7 +39,7 @@ public class TestResource {
     return bs1Service.bs1Fail50PercentTime();
   }
 
-  @Path("/user/failTimeout")
+  @Path("/failTimeout")
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Uni<JsonObject> failTimeout() {
@@ -47,7 +47,7 @@ public class TestResource {
     return bs1Service.bs1FailTimeout();
   }
 
-  @Path("/user/fail2suc2fail")
+  @Path("/fail2suc2fail")
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Uni<JsonObject> fail2suc2fail() {
