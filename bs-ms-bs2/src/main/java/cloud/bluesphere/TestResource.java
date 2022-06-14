@@ -11,13 +11,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import java.time.Instant;
 
-@Path("/api/v1")
+@Path("/api/v1/bs2")
 public class TestResource {
 
   @Context
   HttpServerRequest request;
 
-  @Path("/bs2/test")
+  @Path("/test")
   @GET
   public Uni<JsonObject> test(){
     Log.infof("Test interface requested at " + Instant.now().toString() + ", from " + request.remoteAddress().toString());
