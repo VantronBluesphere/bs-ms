@@ -16,10 +16,10 @@ import java.time.Instant;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 
-@Path("/api/v1")
+@Path("/api/v1/bs1")
 public class TestResource {
 
-  private AtomicLong counter = new AtomicLong(0);
+  private final AtomicLong counter = new AtomicLong(0);
 
   @RestClient
   Bs2Service bs2Service;
@@ -27,7 +27,7 @@ public class TestResource {
   @Context
   HttpServerRequest request;
 
-  @Path("/bs1/test")
+  @Path("/test")
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Uni<JsonObject> test() {
@@ -36,7 +36,7 @@ public class TestResource {
     return bs2Service.bs2Test();
   }
 
-  @Path("/bs1/fail50PercentTime")
+  @Path("/fail50PercentTime")
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Uni<JsonObject> fail50PercentTime() {
