@@ -17,9 +17,6 @@ import javax.ws.rs.core.MediaType;
 
 //@RegisterRestClient(configKey = "bs-ms-bs1")
 @RegisterRestClient(baseUri = "stork://bs-ms-bs1")
-@Retry(maxRetries = 1, delay = 1000)
-@Timeout(250)
-@CircuitBreaker(requestVolumeThreshold = 4)
 public interface Bs1Service {
 
   @Path("/api/v1/bs1/test")
@@ -27,17 +24,20 @@ public interface Bs1Service {
   @Produces(MediaType.APPLICATION_JSON)
   Uni<JsonObject> bs1Test();
 
+  @Retry(maxRetries = 1, delay = 1000)
   @Fallback(Bs1ServiceBs1Fail50PercentTimeFallback.class)
   @Path("/api/v1/bs1/fail50PercentTime")
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   Uni<JsonObject> bs1Fail50PercentTime();
 
+  @Timeout(250)
   @Path("/api/v1/bs1/failTimeout")
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   Uni<JsonObject> bs1FailTimeout();
 
+  @CircuitBreaker(requestVolumeThreshold = 4)
   @Path("/api/v1/bs1/fail2suc2fail")
   @GET
   @Produces(MediaType.APPLICATION_JSON)
