@@ -25,7 +25,16 @@ public class ExceptionMapper {
   public Uni<RestResponse<ApiErrorResult>> mapException(ClientWebApplicationException t) {
     Log.errorf(t, "ClientWebApplicationException occurred: ");
     try (JsonReader jsonReader = Json.createReader(new StringReader(t.getResponse().readEntity(String.class)))) {
-      JsonObject data = jsonReader.readObject();
+      JsonObject data;
+      try {
+        data = jsonReader.readObject();
+      }catch (Exception e){
+        ApiErrorResult apiErrorResult = new ApiErrorResult(ApiErrorCode.UNKNOWN_EXCEPTION, e.getMessage());
+        data = Json.createObjectBuilder()
+            .add(ApiErrorResult.ERROR_CODE, ApiErrorCode.UNKNOWN_EXCEPTION.toString())
+            .add(ApiErrorResult.ERROR_MSG, e.getMessage())
+            .build();
+      }
       RestResponse<ApiErrorResult> restResponse = RestResponse.ResponseBuilder.<ApiErrorResult>serverError().entity(new ApiErrorResult(ApiErrorCode.EXTERNAL_SERVICE_EXCEPTION, t.getMessage() + ", external service response code: " + t.getResponse().getStatus() + " and body: " + data.toString())).build();
       return Uni.createFrom().item(restResponse);
     }

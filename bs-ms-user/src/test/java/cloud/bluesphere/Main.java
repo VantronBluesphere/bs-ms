@@ -13,7 +13,8 @@ import java.time.Instant;
 public class Main {
 
   public static void main(String[] args) {
-    Log.infof("ss: {}", true);
+    JsonObject jsonObject = Json.createObjectBuilder().add("x", 123).add("y", true).build();
+    System.out.println(jsonObject.toString());
 
   }
 }

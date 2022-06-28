@@ -8,11 +8,12 @@ import io.vertx.core.http.HttpServerRequest;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.inject.Inject;
-import javax.json.JsonObject;
+import javax.json.*;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import java.time.Instant;
 
@@ -31,10 +32,17 @@ public class TestResource {
   @Path("/test")
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public Uni<JsonObject> test() {
+  public Uni<JsonObject> test(HttpHeaders httpHeaders) {
     Log.infof("Test log message 1, log param 1: %s, log param 2: %b, log param 3: %d", "param1", true, 3);
     Log.debugf("Test log message 2, log param 1: %f, log param 2: %s, log param 3: %b", 2.5d, "param2", false);
-    Log.infof("Test interface requested at " + Instant.now().toString() + ", from " + request.remoteAddress().toString());
+    JsonObjectBuilder httpHeadersJsonObjectBuilder = Json.createObjectBuilder();
+    httpHeaders.getRequestHeaders().forEach((name, values) -> {
+      JsonArrayBuilder httpHeaderValuesJsonArrayBuilder = Json.createArrayBuilder();
+      values.forEach(httpHeaderValuesJsonArrayBuilder::add);
+      httpHeadersJsonObjectBuilder.add(name, httpHeaderValuesJsonArrayBuilder);
+    });
+    JsonObject httpHeadersJsonObject = httpHeadersJsonObjectBuilder.build();
+    Log.infof("Test interface requested at " + Instant.now().toString() + ", from " + request.remoteAddress().toString() + ", httpHeaders: " + httpHeadersJsonObject.toString());
 
     return userService.test().chain(jsonObject -> bs1Service.bs1Test());
   }

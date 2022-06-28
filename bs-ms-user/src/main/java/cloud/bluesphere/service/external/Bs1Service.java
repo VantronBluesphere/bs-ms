@@ -6,6 +6,7 @@ import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Fallback;
 import org.eclipse.microprofile.faulttolerance.Retry;
 import org.eclipse.microprofile.faulttolerance.Timeout;
+import org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
@@ -15,8 +16,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-//@RegisterRestClient(configKey = "bs-ms-bs1")
-@RegisterRestClient(baseUri = "stork://bs-ms-bs1")
+@RegisterRestClient(configKey = "bs-ms-bs1")
+@RegisterClientHeaders
 public interface Bs1Service {
 
   @Path("/api/v1/bs1/test")
