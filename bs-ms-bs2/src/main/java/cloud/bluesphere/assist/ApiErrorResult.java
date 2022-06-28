@@ -2,24 +2,27 @@ package cloud.bluesphere.assist;
 
 public class ApiErrorResult {
 
-  private final ApiErrorCode code;
-  private String description;
+  public static final String ERROR_CODE = "errorCode";
+  public static final String ERROR_MSG = "errorMsg";
 
-  public ApiErrorResult(ApiErrorCode code) {
-    this.code = code;
+  private final ApiErrorCode errorCode;
+  private String errorMsg;
+
+  public ApiErrorResult(ApiErrorCode errorCode) {
+    this.errorCode = errorCode;
   }
 
-  public ApiErrorResult(ApiErrorCode code, String description) {
-    this.code = code;
-    this.description = description;
+  public ApiErrorResult(ApiErrorCode errorCode, String errorMsg) {
+    this.errorCode = errorCode;
+    this.errorMsg = errorMsg;
   }
 
-  public ApiErrorCode getCode() {
-    return code;
+  public ApiErrorCode getErrorCode() {
+    return errorCode;
   }
 
-  public String getDescription() {
-    return description;
+  public String getErrorMsg() {
+    return errorMsg;
   }
 
 }
