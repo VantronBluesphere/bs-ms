@@ -4,6 +4,7 @@ import io.smallrye.mutiny.Uni;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Retry;
 import org.eclipse.microprofile.faulttolerance.Timeout;
+import org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import javax.json.JsonObject;
@@ -12,8 +13,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-//@RegisterRestClient(configKey = "bs-ms-bs2")
-@RegisterRestClient(baseUri = "stork://bs-ms-bs2")
+@RegisterRestClient(configKey = "bs-ms-bs2")
+@RegisterClientHeaders
 @Retry
 @Timeout
 @CircuitBreaker
