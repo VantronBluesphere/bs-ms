@@ -98,16 +98,6 @@
       <artifactId>quarkus-smallrye-fault-tolerance</artifactId>
     </dependency>
 
-    <!-- k8s -->
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-kubernetes</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-kubernetes-client</artifactId>
-    </dependency>
-
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
